@@ -8,7 +8,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apk add --no-cache gcc musl-dev && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apk del gcc musl-dev
 
 # Copy the application code
 COPY . .
